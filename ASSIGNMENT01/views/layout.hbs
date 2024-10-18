@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    {{{body}}}
-  </body>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/style-switcher.css' />
+  <!--========== UNICONS ==========-->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <!--========== BOXICONS ==========-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel='stylesheet'>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+</head>
+
+<body>
+  <div class="main-container">
+    <!--========== Aside start ==========-->
+    <div class="aside">
+      <div class="logo">
+        <a href="/"><span>H</span>asti</a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+      </div>
+      <ul class="nav">
+        <li><a href="/" class="active"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/portfolio/about"><i class="fa fa-user"></i>About</a></li>
+        <li><a href="/portfolio/services"><i class="fa fa-list"></i>Services</a></li>
+        <li><a href="/portfolio/projects"><i class="fa fa-briefcase"></i>Portfolio</a></li>
+        <li><a href="/portfolio/contact"><i class="fa fa-comments"></i>Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  {{{body}}}
+  <!--========== MAIN JS ==========-->
+  <script src="/javascripts/script.js"></script>
+  <script src="/javascripts/style-switcher.js"></script>
+
+</body>
 </html>
