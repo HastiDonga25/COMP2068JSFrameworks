@@ -1,0 +1,19 @@
+{{!-- Use this form to add a new project --}}
+<h1>{{title}}</h1>
+<form method="POST">
+    <fieldset>
+        {{!-- input name and id must match field name in model class --}}
+        <label for="bookName">Name</label>
+        <input type="text" id="bookName" name="bookName" required>
+    </fieldset>
+    <fieldset>
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="startDate" required>
+    </fieldset>
+    <fieldset>
+        <label for="author">Author Name</label>
+        <input type="text" id="author" name="author" required>
+    </fieldset>
+    {{!-- Button to trigger the POST Action --}}
+    <button class="offset-3 btn btn-primary">Save a New Book</button>
+</form>

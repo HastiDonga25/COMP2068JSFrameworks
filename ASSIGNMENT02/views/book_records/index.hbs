@@ -1,0 +1,36 @@
+{{!-- CRUD Functionality --}}
+{{!-- CREATE Button --}}
+<h1>{{title}}</h1>
+{{!-- Table structure --}}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Author Name</th>
+            <th>Status of Reading</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Loop through dataset --}}
+        {{#each dataset}}
+        <tr>
+            <td>{{this.bookName}}</td>
+            <td>{{toShortDate this.startDate}}</td>
+            <td>{{toShortDate this.endDate}}</td>
+            <td>{{this.author}}</td>
+            <td>{{this.statusOfReading}}</td>
+            {{!-- UPDATE and DELETE Buttons --}}
+            <td>
+                <a href="/book_records/edit/{{this._id}}" class="btn btn-info">Update</a>
+                &nbsp;
+                <a href="/book_records/delete/{{this._id}}" class="btn btn-info" onclick="return confirmDeletion()">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<a href="/book_records/add" class="btn btn-primary">Add a new Record</a>

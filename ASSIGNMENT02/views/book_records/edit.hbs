@@ -1,0 +1,33 @@
+{{!-- Use this form to update a project --}}
+<h1>{{title}}</h1>
+<form method="POST">
+    <fieldset>
+        <label for="bookName"> Book Name</label>
+        <input type="text" id="bookName" name="bookName" required value="{{book_record.bookName}}">
+    </fieldset>
+    <fieldset>
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="startDate" value="{{toShortDate book_record.startDate}}" >
+    </fieldset>
+    <fieldset>
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="endDate" value="{{toShortDate book_record.endDate}}" >
+    </fieldset>
+    <fieldset>
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author" required value="{{book_record.author}}">
+    </fieldset>
+    <fieldset>
+        <label for="statusOfReading">Status of Reading</label>
+        <select name="statusOfReading" id="statusOfReading">
+            {{!-- <option value="GOING TO START">GOING TO START</option>
+            <option value="IN PROGRESS">IN PROGESS</option>
+            <option value="COMPLETED">COMPLETED</option> --}}
+            {{createOptionElement "GOING TO START" book_record.statusOfReading}}
+            {{createOptionElement "IN PROGRESS" book_record.statusOfReading}}
+            {{createOptionElement "COMPLETED" book_record.statusOfReading}}
+        </select>
+    </fieldset>
+    {{!-- Button to trigger the POST Action --}}
+    <button class="btn btn-primary">Update Book Record</button>
+</form>
