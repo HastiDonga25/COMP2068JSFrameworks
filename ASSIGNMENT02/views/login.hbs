@@ -1,22 +1,28 @@
 <h1>
   Login
 </h1>
- 
+
 {{#if messages}}
-    <div class="alert alert-danger">
-        Invalid credentials
-    </div>
+<div class="alert alert-danger">
+  Invalid credentials
+</div>
 {{else}}
-    <div class="alert alert-info">
-        Please enter your credentials
-    </div>
+<div class="alert alert-info">
+  Please enter your credentials
+</div>
 {{/if}}
 <form method="post">
   <fieldset class="form-group">
     <label for="username" class="col-2 control-label">
-      Username: *
+      Username:*
     </label>
-    <input name="username" id="username" required />
+    <input
+      name="username"
+      id="username"
+      required
+      type="email"
+      placeholder="email@email.com"
+    />
   </fieldset>
   <fieldset class="form-group">
     <label for="password" class="col-2 control-label">
@@ -24,16 +30,16 @@
     </label>
     <input name="password" id="password" type="password" required />
   </fieldset>
-  <fieldset class="form-group">
+  <fieldset class="form-group" id="login-btn">
     <button class="btn btn-info offset-3">
       Login
     </button>
-    <a href="/github" class="btn btn-success">
+    <a href="/github" class="btn btn-info offset-3">
       Login with Github
     </a>
     <hr />
-    Need an account?
-    <a href="/register" title="Register">
+    <p>Need an account?</p>
+    <a href="/register" title="Register" class="register-btn">
       Register
     </a>
   </fieldset>

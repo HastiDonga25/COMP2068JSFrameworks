@@ -24,13 +24,16 @@
             <td>{{this.statusOfReading}}</td>
             {{!-- UPDATE and DELETE Buttons --}}
             <td>
+                {{#if ../user}}
                 <a href="/book_records/edit/{{this._id}}" class="btn btn-info">Update</a>
                 &nbsp;
                 <a href="/book_records/delete/{{this._id}}" class="btn btn-info" onclick="return confirmDeletion()">Delete</a>
+                {{/if}}
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-
-<a href="/book_records/add" class="btn btn-primary">Add a new Record</a>
+{{#if user}}
+<a href="/book_records/add" class="btn btn-primary add-btn" >Add a new Record</a>
+{{/if}}

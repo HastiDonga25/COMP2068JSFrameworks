@@ -10,14 +10,14 @@ router.get("/", async (req, res, next) => {
     // Retrive all Projects in the DB sorted by date
     let data = await bookRecord.find().sort({ startDate: 1 });
     //render the view with the data
-    res.render("book_records/index", { title: "Book Record Management System", dataset: data, });
+    res.render("book_records/index", { title: "Book Record Management System", dataset: data, user: req.user});
 });
 // GET/ book_records/add > when i click on the Add button in the index page
 // This path is relative to the path defined in app.js
 router.get("/add", async (req, res, next) => {
     // Render the add view
     //foldername/viewname (withour the extension)
-    res.render("book_records/add", { title: "Add a new Book Record" });
+    res.render("book_records/add", { title: "Add a new Book Record",  user: req.user });
 });
 // POST/ book_records/add > when i submit the form in th add page by clicking the save button
 router.post("/add", async (req, res, next) => {
@@ -52,7 +52,8 @@ router.get("/edit/:_id", async (req, res, next) => {
     //Redirect to the index page to show the update data
     res.render("book_records/edit", {
         title: "Edit the Record",
-        book_record: bookRecordData
+        book_record: bookRecordData,
+        user: req.user
     });
 });
 

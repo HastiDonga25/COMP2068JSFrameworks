@@ -5,6 +5,9 @@ var path = require('path'); // Utility for handling and transforming file paths
 var cookieParser = require('cookie-parser'); // Middleware for parsing cookies
 var logger = require('morgan'); // Logger for HTTP requests
 
+var User = require("./Models/user");
+var GitHubStrategy = require("passport-github2").Strategy;
+
 // Importing route handlers
 var indexRouter = require('./routes/index'); // Main index route
 var usersRouter = require('./routes/users'); // Route for user-related actions
@@ -21,7 +24,6 @@ var app = express();
 // Authentication mechanics (passport base and session)
 var passport = require("passport");
 var session = require("express-session");
-var User = require("./Models/user");
 
 // Setting up view engine
 app.set('views', path.join(__dirname, 'views')); // Specifies directory for views
@@ -46,6 +48,31 @@ app.use(passport.initialize());
 app.use(passport.session()); // enables middleware for persisent login sessions
 //configure local strtegy for username/password authentication
 passport.use(User.createStrategy()); // createStrategy() comes from plm plugin
+// GitHUb strategy configuration
+passport.use(new GitHubStrategy(
+  {
+    clientID: configs.Authentication.Github.clientID,
+    clientSecret: configs.Authentication.Github.clientSecret,
+    callbackURL: configs.Authentication.Github.callbackURL,
+  },
+  async (accessToken, refreshToken, profile, done)=>{
+    // find user
+    const user = await User.findOne({oauthID: profile.id});
+    // if it exitsrs return done(null, user)
+    if(user)
+      return done(null,user);
+    // if null then create
+    else{
+      const newUser = new User({
+        username: profile.username,
+        oauthID: profile.id,
+        oauthProvide: "Github",
+      });
+      let savedUser = await newUser.save();
+      return done(null, newUser);
+    }
+  }
+));
 passport.serializeUser(User.serializeUser()); // serializeUser() comes from plm plugin
 passport.deserializeUser(User.deserializeUser()); // deserializeUser() comes from plm plugin
 // Route Configuration
@@ -63,21 +90,6 @@ mongoose
     console.log("Error connecting to MongoDB:", error);
   });
 
-// Catch 404 errors and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404)); // Passes a 404 error if route not found
-});
-
-// Error handler
-app.use(function (err, req, res, next) {
-  // Sets error message and error details only in development mode
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // Renders the error page with the status code or defaults to 500
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 //import hbs to add helper functions for my views
 
@@ -95,6 +107,22 @@ Handlebars.registerHelper("createOptionElement",(currentValue, selectedValue) =>
   else{
     return new Handlebars.SafeString(`<option>${currentValue}</option>`)
   }
+});
+
+// Catch 404 errors and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404)); // Passes a 404 error if route not found
+});
+
+// Error handler
+app.use(function (err, req, res, next) {
+  // Sets error message and error details only in development mode
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // Renders the error page with the status code or defaults to 500
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 // Exporting the app module

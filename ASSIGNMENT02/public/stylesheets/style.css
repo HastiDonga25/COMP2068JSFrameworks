@@ -152,49 +152,137 @@ footer p{
     background-color: rgba(14, 239, 255, 0.2); /* Slightly stronger hover effect */
 }
 
-/* Form container styling */
+/* Form Container Styling */
 form {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     margin: 3rem auto;
     padding: 2.5rem;
     background-color: var(--second-bg-color);
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 1.5rem rgba(0, 238, 255, 0.1);
     color: var(--text-color);
 }
 
-/* Fieldset and label styling */
+/* Fieldset Styling */
 fieldset {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     border: none;
     display: flex;
     flex-direction: column;
 }
 
-/* Label styling */
+/* Label Styling */
 label {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--main-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
-/* Input field styling */
+/* Input Field Styling */
 input[type="text"],
-input[type="date"] {
+input[type="email"],
+input[type="password"] {
     padding: 1rem;
     font-size: 1.6rem;
     color: var(--text-color);
     background-color: var(--bg-color);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     transition: border-color 0.3s ease;
 }
 
-/* Focus effect on input fields */
 input[type="text"]:focus,
-input[type="date"]:focus {
+input[type="email"]:focus,
+input[type="password"]:focus {
     border-color: var(--main-color);
     outline: none;
 }
 
+/* Button Styling */
+button.btn {
+    padding: 1.2rem 3rem;
+    font-size: 1.6rem;
+    background: var(--main-color);
+    color: var(--second-bg-color);
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button.btn:hover {
+    background: rgba(0, 238, 255, 0.8);
+    transform: scale(1.05);
+}
+
+a.btn {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    background: rgba(0, 238, 255, 0.2);
+    color: var(--main-color);
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+a.btn:hover {
+    background: rgba(0, 238, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* Alert Box Styling */
+.alert {
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    font-size: 1.6rem;
+}
+
+.alert-danger {
+    color: rgba(255, 0, 0, 0.8);
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+
+.alert-info {
+    color: rgba(0, 238, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+/* Links Styling */
+a {
+    color: var(--main-color);
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: rgba(0, 238, 255, 0.8);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 1.5rem 0;
+}
+.last-part p{
+    align-items: center;
+    padding: 0 150px;
+}
+.last-part a,.register-bnt{
+    align-items: center;
+    padding: 0 200px;
+}
+#login-btn button{
+    margin-bottom: 20px;
+}
+#login-btn .register-btn{
+    align-items: center;
+    padding: 0 200px;
+}
+#login-btn p{
+    align-items: center;
+    padding: 0 160px;
+    font-size: 15px;
+}
