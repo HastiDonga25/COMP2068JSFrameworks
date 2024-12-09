@@ -1,4 +1,3 @@
-require('dotenv').config(); // This should be at the very top of the file
 
 // Importing required modules
 var createError = require('http-errors'); // Handles HTTP errors
@@ -19,7 +18,6 @@ var booksRouter = require("./routes/book_records");
 // Import mongoose and the configuration object
 var mongoose = require("mongoose");
 var configs = require("./Configs/globals");
-
 
 // Initializing the Express application
 var app = express();
