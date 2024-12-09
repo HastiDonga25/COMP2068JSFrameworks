@@ -5,6 +5,8 @@ var path = require('path'); // Utility for handling and transforming file paths
 var cookieParser = require('cookie-parser'); // Middleware for parsing cookies
 var logger = require('morgan'); // Logger for HTTP requests
 
+const MongoStore = require('connect-mongo');
+
 var User = require("./Models/user");
 var GitHubStrategy = require("passport-github2").Strategy;
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
@@ -41,7 +43,10 @@ app.use(session(
   {
     secret: "BookRecordManagementSystem",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.CONNECTION_STRING_MONGODB // Use your MongoDB connection string
+  })
   }
 ));
 // Initialize passport
