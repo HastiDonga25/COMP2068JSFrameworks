@@ -1,3 +1,5 @@
+require('dotenv').config(); // This should be at the very top of the file
+
 // Importing required modules
 var createError = require('http-errors'); // Handles HTTP errors
 var express = require('express'); // Framework for handling server and routing
