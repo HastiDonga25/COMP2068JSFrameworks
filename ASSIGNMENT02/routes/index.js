@@ -75,4 +75,17 @@ router.get("/github/callback",
   )
 );
 
+// GET /google > Start Google authentication
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+// GET /auth/google/callback > Handle Google callback
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/book_records",
+    failureRedirect: "/login",
+  })
+);
+
+
 module.exports = router;

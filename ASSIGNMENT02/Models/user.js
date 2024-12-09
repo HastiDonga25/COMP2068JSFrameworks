@@ -8,7 +8,7 @@ const schemaObj ={
     password: {type: String},// never store passwords in plain text
     // add feilds to handle oauth users
     oauthID: {type: String}, // identify user from oauth provider
-    oauthProvider:{ type: Date, deafult:Date.now }, // identify the oauth provide, eg Github, google...
+    oauthProvider:{ type: String }, // identify the oauth provide, eg Github, google...
     created: {type:Date, default: Date.now },
 };
 

@@ -7,6 +7,7 @@ var logger = require('morgan'); // Logger for HTTP requests
 
 var User = require("./Models/user");
 var GitHubStrategy = require("passport-github2").Strategy;
+var GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 // Importing route handlers
 var indexRouter = require('./routes/index'); // Main index route
@@ -70,6 +71,36 @@ passport.use(new GitHubStrategy(
       });
       let savedUser = await newUser.save();
       return done(null, newUser);
+    }
+  }
+));
+passport.use(new GoogleStrategy(
+  {
+    clientID: configs.Authentication.Google.clientID,
+    clientSecret: configs.Authentication.Google.clientSecret,
+    callbackURL: configs.Authentication.Google.callbackURL,
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      // Check if user exists in database
+      let user = await User.findOne({ oauthID: profile.id });
+
+      if (user) {
+        return done(null, user);
+      } else {
+        // Create a new user if not found
+        const newUser = new User({
+          username: profile.displayName,
+          oauthID: profile.id,
+          oauthProvider: "Google",
+          email: profile.emails[0].value, // Google provides email in profile
+        });
+
+        let savedUser = await newUser.save();
+        return done(null, savedUser);
+      }
+    } catch (err) {
+      return done(err, null);
     }
   }
 ));
