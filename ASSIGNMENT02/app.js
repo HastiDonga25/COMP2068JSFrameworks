@@ -58,19 +58,25 @@ passport.use(new GitHubStrategy(
   },
   async (accessToken, refreshToken, profile, done)=>{
     // find user
-    const user = await User.findOne({oauthID: profile.id});
-    // if it exitsrs return done(null, user)
-    if(user)
-      return done(null,user);
-    // if null then create
-    else{
-      const newUser = new User({
-        username: profile.username,
-        oauthID: profile.id,
-        oauthProvide: "Github",
-      });
-      let savedUser = await newUser.save();
-      return done(null, newUser);
+    try{
+      const user = await User.findOne({oauthID: profile.id});
+
+      // if it exitsrs return done(null, user)
+      if(user)
+        return done(null,user);
+      // if null then create
+      else{
+        const newUser = new User({
+          username: profile.username,
+          oauthID: profile.id,
+          oauthProvide: "Github",
+        });
+        let savedUser = await newUser.save();
+        return done(null, newUser);
+      }
+    }
+    catch (err) {
+      return done(err, null);
     }
   }
 ));
